@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Promise & Matter helps companies measure the gap between public commitments and material reality.">
+  <title>Promise & Matter — Measure the gap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23101416'/%3E%3Cpath d='M12 19h25a13 13 0 0 1 0 26H25V31h12a1 1 0 0 0 0-2H12z' fill='%23d8ff43'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #101416;
+      --paper: #f4f5f2;
+      --white: #ffffff;
+      --acid: #d8ff43;
+      --blue: #215bd8;
+      --muted: #6b7375;
+      --line: rgba(16,20,22,.16);
+      --font: "Manrope", system-ui, sans-serif;
+      --mono: "DM Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 400 1rem/1.55 var(--font); }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .eyebrow { margin: 0 0 18px; font: 500 .75rem/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 78px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.025em; text-decoration: none; }
+    .mark { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 5px; background: var(--ink); color: var(--acid); font: 500 .75rem/1 var(--mono); }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: .875rem; }
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .nav-cta { padding: 10px 15px; background: var(--ink); color: var(--white); border-radius: 999px; }
+    .hero { padding: 56px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: 34px; align-items: stretch; }
+    .hero-copy { min-height: 560px; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 0 6px; }
+    h1 { max-width: 690px; margin: 0; font-size: clamp(3.25rem, 6.8vw, 6.6rem); line-height: .94; letter-spacing: -.075em; font-weight: 600; }
+    .hero-bottom { max-width: 510px; }
+    .lede { margin: 0 0 26px; font-size: clamp(1.12rem, 1.5vw, 1.38rem); line-height: 1.5; letter-spacing: -.025em; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 20px; border: 1px solid var(--ink); border-radius: 999px; font-weight: 600; text-decoration: none; transition: transform .18s ease, background .18s ease, color .18s ease; }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { background: var(--acid); }
+    .button.secondary:hover { background: var(--ink); color: var(--white); }
+    .hero-visual { position: relative; min-height: 560px; border-radius: 3px; overflow: hidden; background: #dbe2e5; }
+    .hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 66% center; display: block; }
+    .visual-label { position: absolute; left: 18px; bottom: 18px; max-width: 255px; padding: 11px 13px; background: rgba(244,245,242,.93); backdrop-filter: blur(8px); font: 400 .72rem/1.45 var(--mono); }
+    .section { padding: 110px 0; border-top: 1px solid var(--line); }
+    .section-heading { display: grid; grid-template-columns: .36fr 1fr; gap: 40px; margin-bottom: 66px; }
+    .section-heading h2 { max-width: 790px; margin: 0; font-size: clamp(2.25rem, 4.3vw, 4.5rem); line-height: 1.02; letter-spacing: -.06em; font-weight: 600; }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .problem-card { min-height: 315px; padding: 34px; background: var(--paper); display: flex; flex-direction: column; justify-content: space-between; }
+    .problem-card.dark { background: var(--ink); color: var(--white); }
+    .problem-card .num { font: 500 .78rem/1 var(--mono); color: var(--muted); }
+    .problem-card.dark .num { color: var(--acid); }
+    .problem-card h3 { max-width: 510px; margin: 0; font-size: clamp(1.7rem, 3vw, 3.05rem); line-height: 1.1; letter-spacing: -.045em; font-weight: 500; }
+    .problem-card p { max-width: 500px; margin: 18px 0 0; color: var(--muted); }
+    .problem-card.dark p { color: #bcc3c5; }
+    .method { background: var(--ink); color: var(--white); }
+    .method .section-heading { border-color: rgba(255,255,255,.2); }
+    .method .eyebrow { color: var(--acid); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(255,255,255,.22); }
+    .step { min-height: 340px; padding: 27px; border-right: 1px solid rgba(255,255,255,.22); display: flex; flex-direction: column; }
+    .step:last-child { border-right: 0; }
+    .step-index { font: 500 .74rem/1 var(--mono); color: var(--acid); }
+    .step h3 { margin: auto 0 13px; font-size: 1.55rem; letter-spacing: -.035em; }
+    .step p { margin: 0; color: #aeb5b7; font-size: .93rem; }
+    .prototype { display: grid; grid-template-columns: .82fr 1.18fr; gap: 70px; align-items: start; }
+    .prototype-copy { position: sticky; top: 40px; }
+    .prototype-copy h2 { margin: 0 0 24px; font-size: clamp(2.4rem, 4vw, 4.25rem); line-height: 1.02; letter-spacing: -.06em; }
+    .prototype-copy p { max-width: 500px; color: var(--muted); }
+    .lab-note { margin-top: 28px; padding-left: 14px; border-left: 3px solid var(--acid); font: 400 .76rem/1.55 var(--mono); color: var(--ink); }
+    .scorecard { background: var(--white); border: 1px solid var(--line); box-shadow: 0 22px 55px rgba(16,20,22,.08); }
+    .score-head { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 25px; border-bottom: 1px solid var(--line); }
+    .score-title { font-weight: 700; letter-spacing: -.02em; }
+    .pill { padding: 6px 9px; border-radius: 999px; background: #e9edf0; font: 500 .65rem/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .score-body { padding: 25px; }
+    .claim-box { padding: 20px; background: var(--paper); border-left: 4px solid var(--blue); }
+    .claim-box small { display: block; margin-bottom: 8px; font: 500 .68rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    .claim-box p { margin: 0; font-size: 1.15rem; font-weight: 600; letter-spacing: -.02em; }
+    .metrics { margin: 28px 0; display: grid; gap: 18px; }
+    .metric-top { display: flex; justify-content: space-between; margin-bottom: 7px; font-size: .86rem; }
+    .metric-value { font-family: var(--mono); }
+    .track { height: 8px; background: #e1e5e3; overflow: hidden; }
+    .fill { height: 100%; width: var(--score); background: var(--ink); transform-origin: left; animation: grow .9s ease both; }
+    .metric:nth-child(2) .fill { background: var(--blue); }
+    .metric:nth-child(3) .fill { background: #c39528; }
+    @keyframes grow { from { transform: scaleX(0); } }
+    .gap-result { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; padding: 22px; background: var(--acid); }
+    .gap-num { font: 500 3rem/1 var(--mono); letter-spacing: -.08em; }
+    .gap-result strong { display: block; font-size: 1rem; }
+    .gap-result span { display: block; margin-top: 4px; font-size: .8rem; }
+    .toggle-label { display: block; margin: 28px 0 10px; font: 500 .68rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .scenario-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .scenario { appearance: none; border: 1px solid var(--line); background: transparent; padding: 10px 12px; border-radius: 999px; font: 500 .78rem/1 var(--font); cursor: pointer; }
+    .scenario[aria-pressed="true"] { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .deliverables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .deliverable { min-height: 245px; padding: 27px; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; }
+    .deliverable svg { width: 38px; height: 38px; }
+    .deliverable h3 { margin: 0 0 8px; font-size: 1.3rem; letter-spacing: -.035em; }
+    .deliverable p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .founder { display: grid; grid-template-columns: 1.1fr .9fr; gap: 80px; align-items: end; }
+    .founder h2 { max-width: 780px; margin: 0; font-size: clamp(2.5rem, 5vw, 5.3rem); line-height: .98; letter-spacing: -.065em; }
+    .founder-copy { max-width: 520px; }
+    .founder-copy p { color: var(--muted); }
+    .founder-meta { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); font: 400 .76rem/1.7 var(--mono); }
+    footer { padding: 38px 0 55px; background: var(--ink); color: var(--white); }
+    .footer-grid { display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+    .footer-brand { font-size: clamp(2rem, 5vw, 4.6rem); font-weight: 600; letter-spacing: -.065em; }
+    .footer-note { max-width: 350px; margin: 0; color: #aeb5b7; font: 400 .76rem/1.6 var(--mono); }
+    @media (max-width: 900px) {
+      .hero-grid, .prototype, .founder { grid-template-columns: 1fr; }
+      .hero-copy { min-height: 470px; }
+      .hero-visual { min-height: 500px; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step:nth-child(2) { border-right: 0; }
+      .step:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.22); }
+      .prototype-copy { position: static; }
+      .deliverables { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 28px, 1180px); }
+      .nav { height: 68px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-cta { padding: 9px 12px; }
+      .hero { padding: 34px 0 55px; }
+      .hero-copy { min-height: 480px; }
+      h1 { font-size: clamp(3.35rem, 18vw, 5.4rem); }
+      .hero-visual { min-height: 410px; }
+      .section { padding: 80px 0; }
+      .section-heading { grid-template-columns: 1fr; gap: 14px; margin-bottom: 42px; }
+      .problem-grid, .steps, .deliverables { grid-template-columns: 1fr; }
+      .problem-card { min-height: 280px; }
+      .step { min-height: 250px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.22); }
+      .step:last-child { border-bottom: 0; }
+      .score-head, .score-body { padding-left: 18px; padding-right: 18px; }
+      .founder { gap: 36px; }
+      .footer-grid { display: grid; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top"><span class="mark" aria-hidden="true">P/M</span> Promise &amp; Matter</a>
+      <div class="nav-links">
+        <a href="#method">Method</a>
+        <a href="#prototype">Prototype</a>
+        <a class="nav-cta" href="#founder">About the venture</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <div>
+            <p class="eyebrow">Material intelligence for credible commitments</p>
+            <h1>Measure the distance between promise and matter.</h1>
+          </div>
+          <div class="hero-bottom">
+            <p class="lede">Promise &amp; Matter helps companies test sustainability and innovation commitments against the materials, energy, labor, and infrastructures their products actually require.</p>
+            <div class="actions">
+              <a class="button primary" href="#prototype">Explore the prototype</a>
+              <a class="button secondary" href="#method">See the method</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="promise-matter-system.jpg" alt="Abstract layered landscape contrasting clean plans above with fibers, minerals, infrastructure, and industrial systems below">
+          <div class="visual-label">Every promise sits on a material system. We make that system visible.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="problem-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">The problem</p>
+          <h2 id="problem-title">Companies can measure targets. The harder question is what those targets are made of.</h2>
+        </div>
+        <div class="problem-grid">
+          <article class="problem-card">
+            <span class="num">01 / PROMISE</span>
+            <div><h3>Commitments are usually evaluated as language.</h3><p>Targets, reports, and product stories can be clear while leaving the underlying system unexamined.</p></div>
+          </article>
+          <article class="problem-card dark">
+            <span class="num">02 / MATTER</span>
+            <div><h3>Products carry histories that claims do not.</h3><p>Feedstocks, infrastructures, toxicities, labor, and geopolitical dependencies can contradict an intended future.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method" id="method" aria-labelledby="method-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">The method</p>
+          <h2 id="method-title">A four-part analysis turns an abstract commitment into a decision-ready material map.</h2>
+        </div>
+        <div class="steps">
+          <article class="step"><span class="step-index">01</span><div><h3>Parse the promise</h3><p>Identify the claim, boundary, timeline, audience, and implied future.</p></div></article>
+          <article class="step"><span class="step-index">02</span><div><h3>Trace the matter</h3><p>Map materials, energy, labor, infrastructure, waste, and historical dependencies.</p></div></article>
+          <article class="step"><span class="step-index">03</span><div><h3>Measure the gap</h3><p>Score omissions, contradictions, uncertainties, and exposure across the system.</p></div></article>
+          <article class="step"><span class="step-index">04</span><div><h3>Rebuild the future</h3><p>Translate findings into product decisions and a narrative the evidence can support.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="prototype" aria-labelledby="prototype-title">
+      <div class="wrap prototype">
+        <div class="prototype-copy">
+          <p class="eyebrow">Interactive prototype</p>
+          <h2 id="prototype-title">A gap score is a starting point, not a verdict.</h2>
+          <p>The assessment shows where a commitment is strong, where its material evidence is thin, and which next investigation could most improve credibility.</p>
+          <div class="lab-note">Illustrative example only. Scores demonstrate the proposed framework and are not based on a real company assessment.</div>
+        </div>
+        <div class="scorecard" aria-live="polite">
+          <div class="score-head"><span class="score-title">Material Commitment Scan</span><span class="pill">Prototype</span></div>
+          <div class="score-body">
+            <div class="claim-box"><small>Illustrative commitment</small><p id="claim">“Transition our flagship product to lower-impact materials by 2030.”</p></div>
+            <div class="metrics">
+              <div class="metric"><div class="metric-top"><span>Promise clarity</span><span class="metric-value" id="clarity-value">82</span></div><div class="track"><div class="fill" id="clarity-bar" style="--score:82%"></div></div></div>
+              <div class="metric"><div class="metric-top"><span>Material traceability</span><span class="metric-value" id="trace-value">46</span></div><div class="track"><div class="fill" id="trace-bar" style="--score:46%"></div></div></div>
+              <div class="metric"><div class="metric-top"><span>System alignment</span><span class="metric-value" id="align-value">31</span></div><div class="track"><div class="fill" id="align-bar" style="--score:31%"></div></div></div>
+            </div>
+            <div class="gap-result"><div class="gap-num" id="gap-value">35</div><div><strong id="gap-label">Material gap: significant</strong><span id="gap-action">Next move: trace feedstock and processing-energy dependencies.</span></div></div>
+            <span class="toggle-label">Explore an evidence scenario</span>
+            <div class="scenario-tabs" role="group" aria-label="Evidence scenario">
+              <button class="scenario" data-scenario="early" aria-pressed="true">Early evidence</button>
+              <button class="scenario" data-scenario="mapped" aria-pressed="false">Supply chain mapped</button>
+              <button class="scenario" data-scenario="aligned" aria-pressed="false">System redesigned</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="deliverables-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">What companies receive</p>
+          <h2 id="deliverables-title">Not another sustainability story. A clearer basis for action.</h2>
+        </div>
+        <div class="deliverables">
+          <article class="deliverable"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 8h32M4 20h22M4 32h30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="30" cy="20" r="5" fill="#d8ff43" stroke="currentColor" stroke-width="2"/></svg><div><h3>Promise map</h3><p>Claims, assumptions, boundaries, evidence, and missing questions in one view.</p></div></article>
+          <article class="deliverable"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="5" width="11" height="11" fill="#215bd8"/><rect x="24" y="5" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"/><rect x="5" y="24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"/><rect x="24" y="24" width="11" height="11" fill="#d8ff43" stroke="currentColor" stroke-width="2"/></svg><div><h3>Material gap analysis</h3><p>A prioritized account of contradictions, uncertainty, and decision risk.</p></div></article>
+          <article class="deliverable"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 31C12 31 13 9 21 9s8 22 14 22" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="21" cy="9" r="4" fill="#d8ff43" stroke="currentColor" stroke-width="2"/></svg><div><h3>Credible future pathway</h3><p>Concrete interventions and language aligned with what the system can support.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="founder" aria-labelledby="founder-title">
+      <div class="wrap founder">
+        <div>
+          <p class="eyebrow">The venture</p>
+          <h2 id="founder-title">Built at the intersection of material research, business, and future-making.</h2>
+        </div>
+        <div class="founder-copy">
+          <p>Promise &amp; Matter is an early-stage venture concept founded by Lu Cheng, a PhD researcher in Science and Technology Studies at Rensselaer Polytechnic Institute. It translates humanities-based material analysis into a practical tool for corporate decision-making.</p>
+          <p>The first research domain is textiles, with a broader ambition: help any product company understand the futures its materials make possible—and the histories they continue to carry.</p>
+          <div class="founder-meta">VENTURE STAGE — CONCEPT &amp; PROTOTYPE<br>ORIGIN — TROY, NEW YORK<br>FOCUS — MATERIAL SYSTEMS / CORPORATE COMMITMENTS</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid"><div class="footer-brand">Promise &amp; Matter</div><p class="footer-note">A prototype venture for measuring the distance between what companies promise and what their products require.</p></div>
+  </footer>
+
+  <script>
+    const scenarios = {
+      early: { clarity: 82, trace: 46, align: 31, gap: 35, label: 'Material gap: significant', action: 'Next move: trace feedstock and processing-energy dependencies.' },
+      mapped: { clarity: 88, trace: 73, align: 52, gap: 23, label: 'Material gap: visible', action: 'Next move: test labor, infrastructure, and end-of-life tradeoffs.' },
+      aligned: { clarity: 91, trace: 86, align: 79, gap: 12, label: 'Material gap: managed', action: 'Next move: document evidence and monitor change over time.' }
+    };
+    const setMetric = (name, value) => {
+      document.getElementById(name + '-value').textContent = value;
+      const bar = document.getElementById(name + '-bar');
+      bar.style.setProperty('--score', value + '%');
+      bar.style.animation = 'none';
+      requestAnimationFrame(() => { bar.style.animation = ''; });
+    };
+    document.querySelectorAll('.scenario').forEach(button => {
+      button.addEventListener('click', () => {
+        const data = scenarios[button.dataset.scenario];
+        document.querySelectorAll('.scenario').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        setMetric('clarity', data.clarity);
+        setMetric('trace', data.trace);
+        setMetric('align', data.align);
+        document.getElementById('gap-value').textContent = data.gap;
+        document.getElementById('gap-label').textContent = data.label;
+        document.getElementById('gap-action').textContent = data.action;
+      });
+    });
+  </script>
+</body>
+</html>
